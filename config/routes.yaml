@@ -1,11 +1,64 @@
-# yaml-language-server: $schema=../vendor/symfony/routing/Loader/schema/routing.schema.json
+app_home:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+    defaults:
+        route: app_login
+        permanent: true
 
-# This file is the entry point to configure the routes of your app.
-# Methods with the #[Route] attribute are automatically imported.
-# See also https://symfony.com/doc/current/routing.html
+app_login:
+    path: /login
+    controller: App\Controller\AuthController::login
 
-# To list all registered routes, run the following command:
-#   bin/console debug:router
+app_logout:
+    path: /logout
+    controller: App\Controller\AuthController::logout
+
+app_register:
+    path: /register
+    controller: App\Controller\AuthController::register
+
+app_dashboard:
+    path: /dashboard
+    controller: App\Controller\DashboardController::index
+
+app_dashboard_students:
+    path: /dashboard/students
+    controller: App\Controller\DashboardController::students
+
+app_dashboard_student_new:
+    path: /dashboard/student/new
+    controller: App\Controller\DashboardController::newStudent
+
+app_dashboard_student_edit:
+    path: /dashboard/student/{id}/edit
+    controller: App\Controller\DashboardController::editStudent
+
+app_dashboard_student_delete:
+    path: /dashboard/student/{id}/delete
+    controller: App\Controller\DashboardController::deleteStudent
+
+app_students_index:
+    path: /students
+    controller: App\Controller\StudentController::index
+
+app_student_new:
+    path: /students/new
+    controller: App\Controller\StudentController::new
+
+app_student_edit:
+    path: /students/{id}/edit
+    controller: App\Controller\StudentController::edit
+
+app_student_delete:
+    path: /students/{id}/delete
+    controller: App\Controller\StudentController::delete
+
+app_students_export:
+    path: /students/export
+    controller: App\Controller\StudentController::export
 
 controllers:
-    resource: routing.controllers
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute

@@ -1,0 +1,42 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div style="max-width: 500px; margin: 50px auto;">
+        <div class="card">
+            <h1 style="text-align: center; margin-bottom: 30px;">
+                <i class="fas fa-user-plus" style="color: #667eea;"></i>
+                Créer un compte
+            </h1>
+            
+            {{ form_start(form) }}
+            
+            <div style="margin-bottom: 20px;">
+                {{ form_label(form.username) }}
+                {{ form_widget(form.username) }}
+                {{ form_errors(form.username) }}
+            </div>
+            
+            <div style="margin-bottom: 25px;">
+                {{ form_label(form.password) }}
+                {{ form_widget(form.password) }}
+                {{ form_errors(form.password) }}
+            </div>
+            
+            <button type="submit" class="btn btn-success" style="width: 100%; justify-content: center;">
+                S'inscrire
+            </button>
+            
+            {{ form_end(form) }}
+            
+            <div style="text-align: center; margin-top: 20px;">
+                Déjà un compte ?
+                <a href="{{ path('app_login') }}" style="color: #667eea; text-decoration: none;">
+                    Se connecter
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

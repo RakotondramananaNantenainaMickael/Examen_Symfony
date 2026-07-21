@@ -1,20 +1,77 @@
-
 ###> symfony/framework-bundle ###
+/.env
+/.env.*
+!/env/.env.*
 /.env.local
 /.env.local.php
 /.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
 /var/
+/var/*
+!/var/.gitkeep
 /vendor/
+/vendor/*
+!/vendor/.gitkeep
+/public/bundles/
+/public/uploads/
+.phpunit.result.cache
+/.phpunit.result.cache
+/phpunit.xml
 ###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.env.*.local
+phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> doctrine/doctrine-bundle ###
+/var/cache/
+/var/log/
+/var/sessions/
+###< doctrine/doctrine-bundle ###
+
+###> symfony/security-checker ###
+/.security-checker
+###< symfony/security-checker ###
+
+###> symfony/translation ###
+/translations/
+###< symfony/translation ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/build/
+/public/build/
+/yarn.lock
+/package-lock.json
+###< symfony/webpack-encore-bundle ###
+
+###> PHP-CS-Fixer ###
+/.php-cs-fixer.cache
+###< PHP-CS-Fixer ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
 
 ###> phpunit/phpunit ###
 /phpunit.xml
-/.phpunit.cache/
+/.phpunit.result.cache
 ###< phpunit/phpunit ###
 
-###> symfony/asset-mapper ###
-/public/assets/
-/assets/vendor/
-###< symfony/asset-mapper ###
+###> composer ###
+/composer.lock
+###< composer ###
+
+### IDE ###
+/.idea/
+/.vscode/
+/.project
+/.settings/
+/.buildpath
+
+### OS ###
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~

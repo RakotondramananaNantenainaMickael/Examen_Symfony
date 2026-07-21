@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <div style="max-width: 600px; margin: 0 auto;">
+        <div class="card">
+            <h1><i class="fas fa-user-graduate"></i> {{ title }}</h1>
+            
+            {{ form_start(form, {'attr': {'class': 'form'}}) }}
+            
+            <div style="margin-bottom: 20px;">
+                {{ form_label(form.firstName) }}
+                {{ form_widget(form.firstName) }}
+                {{ form_errors(form.firstName) }}
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                {{ form_label(form.lastName) }}
+                {{ form_widget(form.lastName) }}
+                {{ form_errors(form.lastName) }}
+            </div>
+            
+            <div style="margin-bottom: 25px;">
+                {{ form_label(form.classroom) }}
+                {{ form_widget(form.classroom) }}
+                {{ form_errors(form.classroom) }}
+            </div>
+            
+            <div style="display: flex; gap: 12px;">
+                <button type="submit" class="btn btn-success">
+                    Enregistrer
+                </button>
+                <a href="{{ path('app_dashboard_students') }}" class="btn btn-secondary" style="background: #718096; color: white;">
+                    Annuler
+                </a>
+            </div>
+            
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

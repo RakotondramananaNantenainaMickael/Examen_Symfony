@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Étudiants{% endblock %}
+
+{% block body %}
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+        <h1>Liste des Étudiants</h1>
+        <div>
+            <a href="{{ path('app_dashboard_student_new') }}" class="btn btn-success">
+                Ajouter
+            </a>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <form method="GET" style="display: flex; gap: 12px; width: 100%;">
+            <input type="text" name="search" class="form-control" placeholder="Rechercher par nom ou prénom..." value="{{ searchTerm }}">
+            
+            <select name="classroom" class="form-control" style="max-width: 200px;">
+                <option value="">Toutes les classes</option>
+                {% for classroom in classrooms %}
+                    <option value="{{ classroom }}" {% if selectedClassroom == classroom %}selected{% endif %}>
+                        {{ classroom }}
+                    </option>
+                {% endfor %}
+            </select>
+            
+            <button type="submit" class="btn btn-primary">
+                Rechercher
+            </button>
+            
+            {% if searchTerm or selectedClassroom %}
+                <a href="{{ path('app_dashboard_students') }}" class="btn btn-secondary" style="background: #718096; color: white;">
+                    Réinitialiser
+                </a>
+            {% endif %}
+        </form>
+    </div>
+
+    <div class="card">
+        {% if students|length > 0 %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Classe</th>
+                        <th>Date d'inscription</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                        <tr>
+                            <td>#{{ student.id }}</td>
+                            <td><strong>{{ student.firstName }}</strong></td>
+                            <td>{{ student.lastName }}</td>
+                            <td><span class="badge badge-primary">{{ student.classroom }}</span></td>
+                            <td>{{ student.createdAt|date('d/m/Y') }}</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="{{ path('app_dashboard_student_edit', {id: student.id}) }}" class="btn btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <form method="POST" action="{{ path('app_dashboard_student_delete', {id: student.id}) }}" 
+                                          onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet étudiant ?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ student.id) }}">
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p style="text-align: center; color: #718096; padding: 40px 0;">
+                <i class="fas fa-info-circle" style="font-size: 2rem; display: block; margin-bottom: 10px;"></i>
+                Aucun étudiant trouvé.
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}
