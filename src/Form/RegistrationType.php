@@ -18,20 +18,26 @@ class RegistrationType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'label' => 'Nom d\'utilisateur',
+                'constraints' => [
+                    new NotBlank(message: 'Le nom d\'utilisateur est obligatoire'),
+                    new Length(
+                        min: 3,
+                        max: 100,
+                        minMessage: 'Le nom d\'utilisateur doit faire au moins {{ limit }} caractères'
+                    ),
+                ],
                 'attr' => ['class' => 'form-control']
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe',
                 'mapped' => true,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez entrer un mot de passe',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Le mot de passe doit faire au moins {{ limit }} caractères',
-                        'max' => 4096,
-                    ]),
+                    new NotBlank(message: 'Veuillez entrer un mot de passe'),
+                    new Length(
+                        min: 6,
+                        max: 4096,
+                        minMessage: 'Le mot de passe doit faire au moins {{ limit }} caractères'
+                    ),
                 ],
                 'attr' => ['class' => 'form-control']
             ]);
